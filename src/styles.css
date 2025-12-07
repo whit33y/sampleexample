@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-midnight: #0f172a;
+  --color-surface: #1e293b;
+  --color-primary: #a78bfa;
+  --color-secondary: #34d399;
+  --color-accent: #fb7185;
+
+  --color-glass-100: rgba(255, 255, 255, 0.05);
+  --color-glass-200: rgba(255, 255, 255, 0.1);
+  --color-glass-300: rgba(255, 255, 255, 0.2);
+}
