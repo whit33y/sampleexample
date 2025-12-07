@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Snippet Library - Design System</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Config for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        midnight: '#0F172A', // Deep Slate
+                        surface: '#1E293B',  // Lighter Slate
+                        primary: '#A78BFA',  // Electric Lavender
+                        secondary: '#34D399', // Mint Green
+                        accent: '#FB7185',   // Soft Coral
+                        glass: {
+                            100: 'rgba(255, 255, 255, 0.05)',
+                            200: 'rgba(255, 255, 255, 0.1)',
+                            300: 'rgba(255, 255, 255, 0.2)',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
+                        'glow': '0 0 20px rgba(167, 139, 250, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-glass-100 backdrop-blur-md border border-white/10 shadow-glass;
+            }
+            .glass-input {
+                @apply bg-black/20 backdrop-blur-sm border border-white/10 text-slate-200 placeholder-slate-400 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none;
+            }
+            .text-glow {
+                text-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+            }
+        }
+        
+        body {
+            @apply bg-midnight text-slate-200 antialiased selection:bg-primary/30 selection:text-white;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(167, 139, 250, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(52, 211, 153, 0.08) 0%, transparent 25%);
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 fixed h-screen glass-panel border-r border-white/10 overflow-y-auto hidden md:block z-50">
+        <div class="p-6">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                    <i class="ph-bold ph-code text-xl"></i>
+                </div>
+                <span class="font-bold text-lg text-white tracking-tight">SnippetUI</span>
+            </div>
+            
+            <nav class="space-y-1">
+                <a href="#colors" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="ph-duotone ph-palette"></i> Colors
+                </a>
+                <a href="#typography" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="ph-duotone ph-text-aa"></i> Typography
+                </a>
+                <a href="#buttons" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="ph-duotone ph-hand-pointing"></i> Buttons
+                </a>
+                <a href="#inputs" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="ph-duotone ph-textbox"></i> Inputs
+                </a>
+                <a href="#tags" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="ph-duotone ph-tag"></i> Tags & Chips
+                </a>
+                <a href="#components" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="ph-duotone ph-squares-four"></i> Components
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-64 p-8 md:p-12 max-w-7xl mx-auto space-y-20 pb-32">
+        
+        <!-- Header -->
+        <header class="space-y-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight text-glow">Design System</h1>
+            <p class="text-xl text-slate-400 max-w-2xl">
+                A friendly, glassmorphic design language for the Code Snippet Library. 
+                Optimized for code readability and developer focus.
+            </p>
+        </header>
+
+        <!-- SECTION: Colors -->
+        <section id="colors" class="scroll-mt-24 space-y-8">
+            <div class="flex items-center gap-4 pb-4 border-b border-white/10">
+                <h2 class="text-2xl font-bold text-white">Color Palette</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Structural -->
+                <div class="space-y-4">
+                    <h3 class="text-sm uppercase tracking-wider text-slate-500 font-semibold">Structural</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <div class="h-24 rounded-xl bg-midnight border border-white/10 shadow-lg"></div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-white font-medium">Midnight</span>
+                                <span class="text-slate-500 font-mono">#0F172A</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-24 rounded-xl bg-surface border border-white/5"></div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-white font-medium">Surface</span>
+                                <span class="text-slate-500 font-mono">#1E293B</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accents -->
+                <div class="space-y-4">
+                    <h3 class="text-sm uppercase tracking-wider text-slate-500 font-semibold">Accents</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="space-y-2">
+                            <div class="h-24 rounded-xl bg-primary shadow-[0_0_15px_rgba(167,139,250,0.4)]"></div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-white font-medium">Primary</span>
+                                <span class="text-slate-500 font-mono">#A78BFA</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-24 rounded-xl bg-secondary shadow-[0_0_15px_rgba(52,211,153,0.4)]"></div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-white font-medium">Success</span>
+                                <span class="text-slate-500 font-mono">#34D399</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-24 rounded-xl bg-accent shadow-[0_0_15px_rgba(251,113,133,0.4)]"></div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-white font-medium">Accent</span>
+                                <span class="text-slate-500 font-mono">#FB7185</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Typography -->
+        <section id="typography" class="scroll-mt-24 space-y-8">
+            <div class="flex items-center gap-4 pb-4 border-b border-white/10">
+                <h2 class="text-2xl font-bold text-white">Typography</h2>
+            </div>
+            
+            <div class="glass-panel rounded-2xl p-8 space-y-12">
+                <!-- Headings -->
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 items-baseline gap-4">
+                        <div class="text-slate-500 font-mono text-sm">Display H1</div>
+                        <div class="md:col-span-3 text-5xl font-bold text-white tracking-tight">Friendly Developer</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 items-baseline gap-4">
+                        <div class="text-slate-500 font-mono text-sm">Heading H2</div>
+                        <div class="md:col-span-3 text-3xl font-bold text-white tracking-tight">Code Snippets & Tricks</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 items-baseline gap-4">
+                        <div class="text-slate-500 font-mono text-sm">Heading H3</div>
+                        <div class="md:col-span-3 text-xl font-semibold text-white">Getting Started with React</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 items-baseline gap-4">
+                        <div class="text-slate-500 font-mono text-sm">Body</div>
+                        <div class="md:col-span-3 text-slate-300 leading-relaxed max-w-2xl">
+                            The quick brown fox jumps over the lazy dog. A modular design system helps us build consistent user interfaces with speed and confidence. This text uses <span class="text-primary font-medium">Plus Jakarta Sans</span> for optimal readability.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Block -->
+                <div class="border-t border-white/10 pt-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="text-slate-500 font-mono text-sm pt-2">Code Monospace</div>
+                        <div class="md:col-span-3 w-full bg-black/40 rounded-xl border border-white/5 p-5 font-mono text-sm leading-6 overflow-hidden relative group">
+                            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 transition-colors" title="Copy code">
+                                    <i class="ph ph-copy"></i>
+                                </button>
+                            </div>
+                            <div class="text-slate-400"><span class="text-secondary">const</span> <span class="text-accent">calculateTotal</span> = (items) => {</div>
+                            <div class="text-slate-400 pl-4"><span class="text-secondary">return</span> items.<span class="text-primary">reduce</span>((acc, curr) => {</div>
+                            <div class="text-slate-400 pl-8"><span class="text-secondary">return</span> acc + curr.price;</div>
+                            <div class="text-slate-400 pl-4">}, <span class="text-orange-400">0</span>);</div>
+                            <div class="text-slate-400">};</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Buttons -->
+        <section id="buttons" class="scroll-mt-24 space-y-8">
+            <div class="flex items-center gap-4 pb-4 border-b border-white/10">
+                <h2 class="text-2xl font-bold text-white">Buttons</h2>
+            </div>
+            
+            <div class="flex flex-wrap gap-6 p-8 glass-panel rounded-2xl items-center">
+                <!-- Primary -->
+                <button class="px-6 py-2.5 rounded-lg bg-primary hover:bg-violet-400 text-white font-semibold shadow-[0_0_20px_rgba(167,139,250,0.3)] hover:shadow-[0_0_25px_rgba(167,139,250,0.5)] border border-white/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
+                    Create Snippet
+                </button>
+
+                <!-- Secondary/Ghost -->
+                <button class="px-6 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 hover:text-white font-medium transition-all duration-200 backdrop-blur-sm">
+                    View Documentation
+                </button>
+
+                <!-- Outline -->
+                <button class="px-6 py-2.5 rounded-lg border border-primary/50 text-primary hover:bg-primary/10 font-medium transition-all duration-200">
+                    Export Data
+                </button>
+
+                <!-- Icon Only -->
+                <button class="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all">
+                    <i class="ph-bold ph-gear text-lg"></i>
+                </button>
+
+                 <!-- Icon Only Active -->
+                 <button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary/20 border border-primary/50 text-primary transition-all shadow-[0_0_10px_rgba(167,139,250,0.2)]">
+                    <i class="ph-fill ph-heart text-lg"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION: Inputs -->
+        <section id="inputs" class="scroll-mt-24 space-y-8">
+            <div class="flex items-center gap-4 pb-4 border-b border-white/10">
+                <h2 class="text-2xl font-bold text-white">Inputs & Search</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Standard Input -->
+                <div class="space-y-3">
+                    <label class="text-sm font-medium text-slate-400">Snippet Title</label>
+                    <input type="text" placeholder="e.g. Center a Div with Flexbox" class="w-full px-4 py-3 rounded-xl glass-input">
+                </div>
+
+                <!-- Select -->
+                <div class="space-y-3">
+                    <label class="text-sm font-medium text-slate-400">Category</label>
+                    <div class="relative">
+                        <select class="w-full px-4 py-3 rounded-xl glass-input appearance-none cursor-pointer">
+                            <option>Frontend</option>
+                            <option>Backend</option>
+                            <option>DevOps</option>
+                        </select>
+                        <i class="ph-bold ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Large Search -->
+                <div class="md:col-span-2">
+                    <label class="text-sm font-medium text-slate-400 mb-3 block">Global Search</label>
+                    <div class="relative group">
+                        <i class="ph-bold ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-xl"></i>
+                        <input type="text" placeholder="Search for snippets, tags, or code..." class="w-full pl-12 pr-4 py-4 rounded-xl glass-input text-lg shadow-lg group-focus-within:shadow-[0_0_20px_rgba(167,139,250,0.15)]">
+                        <div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
+                            <kbd class="hidden md:inline-flex items-center gap-1 px-2 py-1 rounded bg-white/5 border border-white/10 text-xs text-slate-500 font-mono">
+                                <span class="text-xs">⌘</span> K
+                            </kbd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Tags -->
+        <section id="tags" class="scroll-mt-24 space-y-8">
+            <div class="flex items-center gap-4 pb-4 border-b border-white/10">
+                <h2 class="text-2xl font-bold text-white">Tags & Chips</h2>
+            </div>
+            
+            <div class="glass-panel p-8 rounded-2xl flex flex-wrap gap-4">
+                <!-- Default Tag -->
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-slate-300">
+                    Default Tag
+                </span>
+
+                <!-- Branding/Technology Tags -->
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 border border-blue-500/20 text-blue-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> React
+                </span>
+
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-yellow-500/10 border border-yellow-500/20 text-yellow-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span> Python
+                </span>
+
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> CSS
+                </span>
+
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 border border-primary/20 text-primary">
+                    <i class="ph-bold ph-star text-[10px]"></i> Favorited
+                </span>
+            </div>
+        </section>
+
+        <!-- SECTION: Complex Components -->
+        <section id="components" class="scroll-mt-24 space-y-12">
+            <div class="flex items-center gap-4 pb-4 border-b border-white/10">
+                <h2 class="text-2xl font-bold text-white">Complex Components</h2>
+            </div>
+
+            <!-- Code Card -->
+            <div>
+                <h3 class="text-lg font-semibold text-slate-400 mb-6">Snippet Card</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <article class="glass-panel rounded-2xl p-6 group cursor-pointer hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(0,0,0,0.3)]">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex gap-2 mb-3">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">Tailwind</span>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-700/50 text-slate-300 border border-white/5">UI</span>
+                            </div>
+                            <button class="text-slate-500 hover:text-primary transition-colors">
+                                <i class="ph-fill ph-bookmark-simple text-xl"></i>
+                            </button>
+                        </div>
+                        
+                        <h4 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">Glassmorphism Card</h4>
+                        <p class="text-sm text-slate-400 mb-5 line-clamp-2">How to create a glass effect card using backdrop-blur and semi-transparent borders in Tailwind CSS.</p>
+                        
+                        <!-- Mini Code Preview -->
+                        <div class="bg-black/40 rounded-lg p-3 border border-white/5 mb-4 group-hover:border-primary/10 transition-colors">
+                            <code class="text-xs font-mono text-slate-300 truncate block">
+                                <span class="text-accent">.glass</span> { backdrop-filter: blur(12px); }
+                            </code>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-xs text-slate-500">Added 2 days ago</span>
+                            <div class="flex items-center gap-1 text-slate-400 group-hover:text-white transition-colors text-xs font-medium">
+                                View Snippet <i class="ph-bold ph-arrow-right"></i>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Data Table with Expansion -->
+            <div>
+                <h3 class="text-lg font-semibold text-slate-400 mb-6">Snippet Manager Table</h3>
+                
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/10">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-white/5 text-slate-300 border-b border-white/10 uppercase text-xs font-semibold tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4 w-12 text-center"></th>
+                                    <th class="px-6 py-4">Snippet Name</th>
+                                    <th class="px-6 py-4">Language</th>
+                                    <th class="px-6 py-4">Created</th>
+                                    <th class="px-6 py-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <!-- Row 1: Expanded Style -->
+                                <tr class="bg-white/2 hover:bg-white/4 transition-colors">
+                                    <td class="px-6 py-4 text-center">
+                                        <button class="w-6 h-6 rounded flex items-center justify-center bg-primary/20 text-primary hover:bg-primary/30 transition-colors">
+                                            <i class="ph-bold ph-caret-down"></i>
+                                        </button>
+                                    </td>
+                                    <td class="px-6 py-4 font-medium text-white">Array.prototype.reduce()</td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-500/10 border border-yellow-500/20 text-yellow-300">JavaScript</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-400">Oct 24, 2024</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button class="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><i class="ph-bold ph-pencil-simple"></i></button>
+                                            <button class="p-1.5 text-slate-400 hover:text-accent hover:bg-accent/10 rounded-lg transition-colors"><i class="ph-bold ph-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Expansion Panel -->
+                                <tr class="bg-black/20">
+                                    <td colspan="5" class="px-6 py-4 border-b border-white/5 shadow-inner">
+                                        <div class="flex gap-6 animate-[fadeIn_0.3s_ease-out]">
+                                            <div class="flex-1 space-y-2">
+                                                <div class="flex justify-between items-center mb-2">
+                                                    <span class="text-xs uppercase tracking-wider text-slate-500 font-bold">Code Preview</span>
+                                                    <button class="text-xs flex items-center gap-1 text-primary hover:text-white transition-colors"><i class="ph-bold ph-copy"></i> Copy</button>
+                                                </div>
+                                                <div class="bg-midnight rounded-lg border border-white/5 p-4 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+                                                    const sum = [1, 2, 3].reduce((a, b) => a + b, 0);<br>
+                                                    console.log(sum); // 6
+                                                </div>
+                                            </div>
+                                            <div class="w-1/3 space-y-3">
+                                                <h5 class="text-xs uppercase tracking-wider text-slate-500 font-bold">Description</h5>
+                                                <p class="text-slate-400 text-sm leading-relaxed">
+                                                    The reduce() method executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 2: Collapsed -->
+                                <tr class="hover:bg-white/4 transition-colors">
+                                    <td class="px-6 py-4 text-center">
+                                        <button class="w-6 h-6 rounded flex items-center justify-center hover:bg-white/10 text-slate-400 transition-colors">
+                                            <i class="ph-bold ph-caret-right"></i>
+                                        </button>
+                                    </td>
+                                    <td class="px-6 py-4 font-medium text-white">Docker Compose Setup</td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/10 border border-blue-500/20 text-blue-300">DevOps</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-400">Nov 02, 2024</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button class="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><i class="ph-bold ph-pencil-simple"></i></button>
+                                            <button class="p-1.5 text-slate-400 hover:text-accent hover:bg-accent/10 rounded-lg transition-colors"><i class="ph-bold ph-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="pt-20 border-t border-white/10 text-center text-slate-500 text-sm">
+            <p>&copy; 2025 SnippetUI Design System. Built with Tailwind CSS and FontAwesome.</p>
+        </footer>
+    </main>
+
+    <!-- Interactions Script -->
+    <script>
+        // Simple script to handle copying code
+        document.querySelectorAll('button[title="Copy code"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const icon = btn.querySelector('i');
+                const originalClass = icon.className;
+                
+                // Visual feedback
+                icon.className = 'ph-bold ph-check text-green-400';
+                setTimeout(() => {
+                    icon.className = originalClass;
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
