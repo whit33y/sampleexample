@@ -12,7 +12,11 @@ import { Authentication } from '../../components/auth/auth-form/authentication';
 export class AuthPage {
   private authService = inject(AuthService);
 
-  handleLogin(credentials: Authentication) {
-    console.log(credentials);
+  async handleLogin(credentials: Authentication) {
+    try {
+      await this.authService.login(credentials.email, credentials.password);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

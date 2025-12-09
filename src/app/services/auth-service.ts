@@ -6,19 +6,23 @@ import { Models } from 'appwrite';
   providedIn: 'root',
 })
 export class AuthService {
-  readonly currentUser = signal<Models.User<Models.Preferences> | null>(null);
-  readonly isLoggedIn = computed(() => !!this.currentUser());
+  currentUser = signal<Models.User<Models.Preferences> | null>(null);
+  isLoggedIn = computed(() => !!this.currentUser());
 
   constructor() {
     this.restoreSession();
   }
 
   async login(email: string, password: string) {
-    await account.createEmailPasswordSession({
-      email,
-      password,
-    });
-    this.currentUser.set(await account.get());
+    try {
+      await account.createEmailPasswordSession({ email, password });
+      const user = await account.get();
+      this.currentUser.set(user);
+      return user;
+    } catch (error) {
+      this.currentUser.set(null);
+      throw error;
+    }
   }
 
   async register(email: string, password: string, name: string) {
