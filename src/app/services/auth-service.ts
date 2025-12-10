@@ -1,11 +1,13 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { account, ID } from '../../lib/appwrite';
 import { Models } from 'appwrite';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private router = inject(Router);
   currentUser = signal<Models.User<Models.Preferences> | null>(null);
   isLoggedIn = computed(() => !!this.currentUser());
 
@@ -18,6 +20,7 @@ export class AuthService {
       await account.createEmailPasswordSession({ email, password });
       const user = await account.get();
       this.currentUser.set(user);
+      this.router.navigate(['/samples']);
       return user;
     } catch (error) {
       this.currentUser.set(null);
@@ -40,6 +43,7 @@ export class AuthService {
       sessionId: 'current',
     });
     this.currentUser.set(null);
+    this.router.navigate(['/login']);
   }
 
   async restoreSession() {
