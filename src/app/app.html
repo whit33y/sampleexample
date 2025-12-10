@@ -1,1 +1,6 @@
+@if (isLoggedIn()) {
+  <button (click)="logout()">logout</button>
+} @else {
+  <p>You need to log in!</p>
+}
 <router-outlet />
