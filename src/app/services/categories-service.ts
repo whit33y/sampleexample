@@ -42,12 +42,25 @@ export class CategoriesService {
   async postCategory(userId: string, name: string, description?: string) {
     const response = await tablesDb.createRow({
       databaseId: environment.appwriteDatabaseId,
-      tableId: 'cartegories',
+      tableId: 'categories',
       rowId: ID.unique(),
       data: {
         name,
         description,
         userId,
+      },
+    });
+    return response;
+  }
+
+  async updateCategory(rowId: string, name: string, description?: string) {
+    const response = await tablesDb.updateRow({
+      databaseId: environment.appwriteDatabaseId,
+      tableId: 'categories',
+      rowId: rowId,
+      data: {
+        name,
+        description,
       },
     });
     return response;

@@ -45,3 +45,6 @@ Thumbs.db
 #Prettier
 .prettierignore
 /src/environments
+
+#Notes
+*.txt
